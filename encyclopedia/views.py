@@ -22,9 +22,18 @@ def search(request):
         # Rediriger vers la page de l'entrée si elle existe
         return redirect('entry', title=query)
     
-    # Si l'entrée n'existe pas, afficher la page d'erreur
-    return render(request, "encyclopedia/error.html", {
-        "title": query
+    # Recherche par sous-chaîne si pas de correspondance exacte
+    all_entries = util.list_entries()
+    matching_entries = []
+    
+    for entry in all_entries:
+        if query.lower() in entry.lower():
+            matching_entries.append(entry)
+    
+    # Afficher les résultats de recherche
+    return render(request, "encyclopedia/search_results.html", {
+        "query": query,
+        "entries": matching_entries
     })
 
 
