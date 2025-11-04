@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
+from django.contrib import messages
 
 from . import util
 
@@ -35,6 +36,42 @@ def search(request):
         "query": query,
         "entries": matching_entries
     })
+
+
+def create_page(request):
+    if request.method == "POST":
+        title = request.POST.get('title', '').strip()
+        content = request.POST.get('content', '').strip()
+        
+        if not title:
+            messages.error(request, "Title is required.")
+            return render(request, "encyclopedia/create.html", {
+                'content': content
+            })
+        
+        if not content:
+            messages.error(request, "Content is required.")
+            return render(request, "encyclopedia/create.html", {
+                'title': title
+            })
+        
+        # Vérifier si l'entrée existe déjà
+        if util.get_entry(title) is not None:
+            messages.error(request, f"An encyclopedia entry with the title '{title}' already exists.")
+            return render(request, "encyclopedia/create.html", {
+                'title': title,
+                'content': content
+            })
+        
+        # Sauvegarder la nouvelle entrée
+        util.save_entry(title, content)
+        messages.success(request, f"Encyclopedia entry '{title}' has been created successfully!")
+        
+        # Rediriger vers la nouvelle page créée
+        return redirect('entry', title=title)
+    
+    # GET request - afficher le formulaire vide
+    return render(request, "encyclopedia/create.html")
 
 
 def entry(request, title):

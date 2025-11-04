@@ -1,0 +1,247 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page
+{% endblock %}
+
+{% block body %}
+    <div class="create-page">
+        <h1>Create New Encyclopedia Entry</h1>
+        
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <form method="post" class="create-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="title" class="form-label">Entry Title</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="title" 
+                    name="title" 
+                    placeholder="Enter the title of your encyclopedia entry"
+                    value="{{ title|default:'' }}"
+                    required
+                >
+                <small class="form-text text-muted">
+                    Choose a descriptive title for your encyclopedia entry (e.g., "Machine Learning", "React Hooks")
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label for="content" class="form-label">Content (Markdown)</label>
+                <textarea 
+                    class="form-control content-textarea" 
+                    id="content" 
+                    name="content" 
+                    rows="15"
+                    placeholder="Enter the content of your encyclopedia entry using Markdown formatting...
+
+Examples:
+# Main Title
+## Subtitle
+
+**Bold text** and *italic text*
+
+- List item 1
+- List item 2
+
+[Link text](https://example.com)"
+                    required>{{ content|default:'' }}</textarea>
+                <small class="form-text text-muted">
+                    Use Markdown formatting. You can use headers (#), bold (**text**), italic (*text*), lists, links, etc.
+                </small>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-save"></i> Create Encyclopedia Entry
+                </button>
+                <a href="{% url 'index' %}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </form>
+        
+        <div class="markdown-help">
+            <h3>Markdown Quick Reference</h3>
+            <div class="help-grid">
+                <div class="help-item">
+                    <strong>Headers:</strong><br>
+                    <code># H1</code><br>
+                    <code>## H2</code><br>
+                    <code>### H3</code>
+                </div>
+                <div class="help-item">
+                    <strong>Text Formatting:</strong><br>
+                    <code>**bold**</code><br>
+                    <code>*italic*</code><br>
+                    <code>`code`</code>
+                </div>
+                <div class="help-item">
+                    <strong>Lists:</strong><br>
+                    <code>- Item 1</code><br>
+                    <code>- Item 2</code><br>
+                    <code>1. Numbered</code>
+                </div>
+                <div class="help-item">
+                    <strong>Links:</strong><br>
+                    <code>[Text](URL)</code><br>
+                    <code>[Python](/wiki/Python)</code>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .create-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .create-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            border: 1px solid #dee2e6;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            border-radius: 0.375rem;
+            border: 1px solid #ced4da;
+            padding: 0.75rem;
+        }
+        
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+        .content-textarea {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #545b62;
+            border-color: #545b62;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .markdown-help {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        .markdown-help h3 {
+            color: #495057;
+            margin-bottom: 1rem;
+        }
+        
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .help-item {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .help-item code {
+            background-color: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        .alert {
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+    </style>
+{% endblock %}
