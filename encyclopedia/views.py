@@ -74,6 +74,38 @@ def create_page(request):
     return render(request, "encyclopedia/create.html")
 
 
+def edit_page(request, title):
+    # Vérifier que l'entrée existe
+    existing_content = util.get_entry(title)
+    if existing_content is None:
+        return render(request, "encyclopedia/error.html", {
+            "title": title
+        })
+    
+    if request.method == "POST":
+        content = request.POST.get('content', '').strip()
+        
+        if not content:
+            messages.error(request, "Content is required.")
+            return render(request, "encyclopedia/edit.html", {
+                'title': title,
+                'content': existing_content
+            })
+        
+        # Sauvegarder le contenu modifié
+        util.save_entry(title, content)
+        messages.success(request, f"Encyclopedia entry '{title}' has been updated successfully!")
+        
+        # Rediriger vers la page de l'entrée
+        return redirect('entry', title=title)
+    
+    # GET request - afficher le formulaire avec le contenu existant
+    return render(request, "encyclopedia/edit.html", {
+        'title': title,
+        'content': existing_content
+    })
+
+
 def entry(request, title):
     content = util.get_entry(title)
     if content is None:
