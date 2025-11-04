@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib import messages
+import random
 
 from . import util
 
@@ -104,6 +105,25 @@ def edit_page(request, title):
         'title': title,
         'content': existing_content
     })
+
+
+def random_page(request):
+    """
+    Redirige vers une entrée aléatoire de l'encyclopédie
+    """
+    # Obtenir toutes les entrées disponibles
+    entries = util.list_entries()
+    
+    if not entries:
+        # Si aucune entrée n'existe, rediriger vers l'accueil
+        messages.info(request, "No encyclopedia entries found. Create the first one!")
+        return redirect('index')
+    
+    # Sélectionner une entrée aléatoire
+    random_entry = random.choice(entries)
+    
+    # Rediriger vers cette entrée
+    return redirect('entry', title=random_entry)
 
 
 def entry(request, title):
