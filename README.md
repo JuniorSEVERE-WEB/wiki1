@@ -2,9 +2,9 @@
 
 A full-featured Wikipedia-style encyclopedia web application built with Django. This project allows users to browse, search, create, and edit encyclopedia entries with a clean, user-friendly interface.
 
-## ✨ Features
+##  Features
 
-### 📖 Core Functionality
+###  Core Functionality
 - **Browse Encyclopedia Entries**: View all available encyclopedia entries from the homepage
 - **Entry Pages**: Read individual encyclopedia entries with proper Markdown rendering
 - **Search Functionality**: 
@@ -14,13 +14,13 @@ A full-featured Wikipedia-style encyclopedia web application built with Django. 
 - **Edit Existing Entries**: Modify existing entries with pre-populated content
 - **Random Page**: Discover random encyclopedia entries
 
-### 🎨 User Interface
+###  User Interface
 - **Responsive Design**: Clean, Wikipedia-inspired interface
 - **Sidebar Navigation**: Easy access to all features
 - **Error Handling**: Custom 404-style pages for non-existent entries
 - **Enhanced Edit Button**: Prominently positioned for better visibility
 
-### 🔧 Technical Features
+###  Technical Features
 - **Custom Markdown Parser**: Built-in regex-based Markdown to HTML conversion
   - Headers (H1-H6)
   - Bold and italic text
@@ -31,7 +31,7 @@ A full-featured Wikipedia-style encyclopedia web application built with Django. 
 - **No External Dependencies**: Custom Markdown parser eliminates need for external libraries
 - **Django Best Practices**: Proper MVC architecture, template inheritance, and form handling
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -88,7 +88,7 @@ wiki/
 └── manage.py            # Django management script
 ```
 
-## 🎯 Usage
+##  Usage
 
 ### Browsing Entries
 - Visit the homepage to see all available encyclopedia entries
@@ -112,7 +112,7 @@ wiki/
 ### Random Discovery
 - Click "Random Page" in the sidebar to discover random entries
 
-## 🔧 Markdown Support
+##  Markdown Support
 
 The wiki supports the following Markdown syntax:
 
@@ -146,7 +146,7 @@ The wiki supports the following Markdown syntax:
 - **Form Validation**: Prevents duplicate entries and validates input
 - **Error Handling**: User-friendly error pages
 
-## 📝 Sample Entries
+##  Sample Entries
 
 The wiki comes pre-loaded with sample entries:
 - **CSS**: Cascading Style Sheets information
@@ -155,7 +155,7 @@ The wiki comes pre-loaded with sample entries:
 - **HTML**: HyperText Markup Language reference
 - **Python**: Programming language overview
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -163,11 +163,11 @@ The wiki comes pre-loaded with sample entries:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+##  License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🚧 Future Enhancements
+##  Future Enhancements
 
 - [ ] User authentication system
 - [ ] Entry revision history
@@ -177,12 +177,12 @@ This project is open source and available under the [MIT License](LICENSE).
 - [ ] Export entries to PDF
 - [ ] Mobile app version
 
-## 👨‍💻 Author
+##  Author
 
 **JuniorSEVERE-WEB**
 - GitHub: [@JuniorSEVERE-WEB](https://github.com/JuniorSEVERE-WEB)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Built as part of CS50's Web Programming with Python and JavaScript course
 - Inspired by Wikipedia's clean and functional design
@@ -190,4 +190,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-⭐ **Star this repository if you found it helpful!**
+ **Star this repository if you found it helpful!**
